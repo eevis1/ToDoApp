@@ -11,17 +11,15 @@ if (storedTasks) {
   displayTasks();
 }
 
+taskInput.addEventListener("input", function () {
+  // Poista virheilmoitus ja punainen reunus
+  taskInput.classList.remove("error");
+});
+
 // Function to add task to the list
 function addTask() {
   // Get the task name
   const taskName = taskInput.value.trim();
-
-  // Check if task name is blank or too short
-  if (taskName === "" || taskName.length < 3) {
-    taskInput.classList.add("error");
-    alert("Task name must be at least 3 characters long.");
-    return;
-  }
 
   // Check if task name contains invalid characters
   if (!/^[a-zA-Z0-9 ]*$/.test(taskName)) {
@@ -29,6 +27,13 @@ function addTask() {
     alert("Task name contains invalid characters. Please use only letters, numbers, and spaces.");
     return;
   } 
+
+  // Check if task name is blank or too short
+  if (taskName === "" || taskName.length < 3) {
+    taskInput.classList.add("error");
+    alert("Task name must be at least 3 characters long.");
+    return;
+  }
 
   // Add the task to the list
   tasks.push({ name: taskName, done: false });
